@@ -7,6 +7,6 @@ new_mac = input("New MAC address >>")
 
 print(f"[!] Changing MAC address for {interface} to {new_mac}")
 
-subprocess.call(f"ifconfig {interface} down", shell=True)
-subprocess.call(f"ifconfig {interface} hw ether {new_mac}", shell=True)
-subprocess.call(f"ifconfig {interface} up", shell=True)
+subprocess.call(["ifconfig", interface, "down"])  # Using the list will prevent command injection attacks.
+subprocess.call(["ifconfig", interface, "hw", "ether", new_mac])
+subprocess.call(["ifconfig", interface, "up"])
